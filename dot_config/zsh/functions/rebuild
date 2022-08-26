@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+
+rebuild () {
+  local old_dir=$(pwd)
+  if [ "$#" -ne 1 ]; then
+    echo "Specify a DT to rebuild."
+    return 1
+  fi
+
+  if whence deactivate >/dev/null; then
+    deactivate
+  fi
+
+  cd "/Users/rohanramchand/src/all-the-things/deployable/${(D)1}"
+  make update
+
+  cd $old_dir
+}
+
+rebuild $*

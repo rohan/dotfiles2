@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+to () {
+  cd ~${(D)1}
+}
+
+to $1

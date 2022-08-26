@@ -1,0 +1,43 @@
+#!/usr/bin/env zsh
+set -o pipefail
+local message="c'est bon"
+
+if [ "$#" -eq 0 ]; then
+  echo "Either set a tag, or a tag and a message, to approve."
+  exit 1
+fi
+
+local tag="$1"
+shift
+
+while [[ ${1} ]]; do
+  case "$1" in
+    -m|--message)
+      message=${2}
+      shift
+      ;;
+    *)
+      echo "Unknown parameter: ${1}"
+      return 1
+  esac
+
+  if ! shift; then
+    echo "Missing argument."
+    return 1
+  fi
+done
+
+local old_pwd=$(pwd)
+cd ~/src/all-the-things/
+
+echo "Fetching tags..."
+git fetch --tags
+echo "Checking out $tag"
+git checkout $tag
+
+echo "Tagging HEAD as $tag.approved with message \"$message\""
+git tag -s $tag.approved -m $message
+echo "Pushing $tag.approved to origin"
+git push origin $tag.approved
+
+cd $old_pwd

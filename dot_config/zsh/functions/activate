@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+activate () {
+  local venv=".venv"
+
+  if [ "$#" -eq 0 ]; then
+    echo "Usage: activate [-3] [DT]"
+    return 1
+  fi
+
+  while [[ ${1} ]]; do
+    case "$1" in
+      -3)
+        venv=".venv3"
+        shift
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+  local dt="$1"
+
+  source "/Users/rohanramchand/src/all-the-things/deployable/${(D)dt}/src/${(D)venv}/bin/activate"
+}
+
+activate $1 $2

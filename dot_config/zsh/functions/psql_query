@@ -1,0 +1,1 @@
+~/src/scripts/psql_query.sh $argv[1] $argv[2]
