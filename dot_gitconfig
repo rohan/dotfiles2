@@ -1,0 +1,31 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Rohan Ramchand
+	email = rohan@neon.xyz
+	signingkey = E322B76503DB1BBB
+[push]
+	default = simple
+	autoSetupRemote = true
+[alias]
+  base = "!git show-branch | sed 's/].*//' | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/^.*\\[//' | sed 's/[\\^~].*//'"
+  parents = "!sh -c \"while [ $(git rev-parse --abbrev-ref HEAD) != \"master\" ]; do parent=$(git base); echo $parent; git checkout $parent; done\""
+  checkout-remote = checkout
+  br = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+
+[core]
+	excludesfile = /Users/rohanramchand/.global_ignore
+	preloadIndex = true
+[pager]
+	branch = false
+	show = false
+	diff = false
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
