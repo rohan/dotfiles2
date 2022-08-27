@@ -31,8 +31,8 @@ fi
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-eval "$(pyenv init --no-rehash -)"
-eval "$(/opt/homebrew/bin/brew shellenv)"
+type pyenv > /dev/null && eval "$(pyenv init --no-rehash -)"
+type brew > /dev/null && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export GOPATH=$HOME/src/go # don't forget to change your path correctly!
 export GOROOT=/usr/local/opt/go/libexec
