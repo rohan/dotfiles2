@@ -28,7 +28,7 @@ if [[ -f "/usr/local/opt/fzf/shell/key-bindings.zsh" ]]; then
   source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 fi
 
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+type fzf > /dev/null && [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 type pyenv > /dev/null && eval "$(pyenv init --no-rehash -)"
