@@ -17,3 +17,8 @@ export LESS=-iRFXMx4
 
 export PYTHONDONTWRITEBYTECODE=1
 
+if [ -S "${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" ]; then
+  # `man ssh`: SSH_AUTH_SOCK Identifies the path of a UNIX-domain socket used
+  # to communicate with the agent.
+  export SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+fi
